@@ -1,22 +1,12 @@
 ---
+export const prerender = false;
+
 import Layout from '@layouts/Layout.astro';
-import { obtenerTodasLasNoticias, obtenerNoticiaPorSlug } from '@lib/supabase';
+import { obtenerNoticiaPorSlug } from '@lib/supabase';
 
-// Generar rutas estáticas para todas las noticias
-export async function getStaticPaths() {
-  const noticias = await obtenerTodasLasNoticias();
-  return noticias.map((noticia) => ({
-    params: { slug: noticia.slug },
-    props: { noticia }
-  }));
-}
-
-// Obtener la noticia de las props o por slug
-const { noticia: noticiaProps } = Astro.props;
 const { slug } = Astro.params;
-const noticia = noticiaProps || await obtenerNoticiaPorSlug(slug || '');
+const noticia = await obtenerNoticiaPorSlug(slug || '');
 
-// Si no existe la noticia, mostrar 404
 if (!noticia) {
   return Astro.redirect('/404');
 }
