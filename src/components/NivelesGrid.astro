@@ -1,0 +1,199 @@
+---
+const niveles = [
+  {
+    id: "primario",
+    nombre: "Nivel Primario",
+    edades: "6 a 12 años",
+    descripcion: "Construimos las bases sólidas del conocimiento, fomentando la curiosidad, el pensamiento crítico y las habilidades sociales en un ambiente de contención y estímulo.",
+    caracteristicas: [
+      "Metodología de aprendizaje activo",
+      "Desarrollo de habilidades socioemocionales",
+      "Proyectos interdisciplinarios",
+      "Educación en valores"
+    ],
+    color: "primary",
+    icono: "academic",
+    href: "/primaria"
+  },
+  {
+    id: "secundario",
+    nombre: "Nivel Secundario",
+    edades: "12 a 18 años",
+    descripcion: "Preparamos a los jóvenes para los desafíos del futuro, combinando excelencia académica con desarrollo personal y orientación vocacional.",
+    caracteristicas: [
+      "Preparación universitaria integral",
+      "Orientación vocacional personalizada",
+      "Desarrollo del pensamiento crítico",
+      "Proyectos de investigación"
+    ],
+    color: "secondary",
+    icono: "graduation",
+    href: "/secundaria"
+  }
+];
+
+const iconPaths: Record<string, string> = {
+  academic: "M12 14l9-5-9-5-9 5 9 5zm0 0l6.16-3.422a12.083 12.083 0 01.665 6.479A11.952 11.952 0 0012 20.055a11.952 11.952 0 00-6.824-2.998 12.078 12.078 0 01.665-6.479L12 14zm-4 6v-7.5l4-2.222",
+  graduation: "M4.26 10.147a60.436 60.436 0 00-.491 6.347A48.627 48.627 0 0112 20.904a48.627 48.627 0 018.232-4.41 60.46 60.46 0 00-.491-6.347m-15.482 0a50.57 50.57 0 00-2.658-.813A59.905 59.905 0 0112 3.493a59.902 59.902 0 0110.399 5.84c-.896.248-1.783.52-2.658.814m-15.482 0A50.697 50.697 0 0112 13.489a50.702 50.702 0 017.74-3.342M6.75 15a.75.75 0 100-1.5.75.75 0 000 1.5zm0 0v-3.675A55.378 55.378 0 0112 8.443m-7.007 11.55A5.981 5.981 0 006.75 15.75v-1.5"
+};
+
+const colorClasses: Record<string, {
+  gradient: string;
+  bg: string;
+  border: string;
+  text: string;
+  light: string;
+  button: string;
+}> = {
+  primary: {
+    gradient: "from-primary-600 to-primary-700",
+    bg: "bg-primary-50",
+    border: "border-primary-200",
+    text: "text-primary-600",
+    light: "bg-primary-100",
+    button: "btn-primary"
+  },
+  secondary: {
+    gradient: "from-secondary-600 to-secondary-700",
+    bg: "bg-secondary-50",
+    border: "border-secondary-200",
+    text: "text-secondary-600",
+    light: "bg-secondary-100",
+    button: "bg-secondary-600 hover:bg-secondary-700 text-white"
+  }
+};
+---
+
+<section id="niveles" class="py-24 relative overflow-hidden">
+  <!-- Fondo -->
+  <div class="absolute inset-0 bg-gradient-to-br from-white via-secondary-50/30 to-primary-50/20"></div>
+  <div class="absolute inset-0 bg-pattern opacity-5"></div>
+
+  <!-- Elementos decorativos -->
+  <div class="absolute top-20 left-20 w-48 h-48 bg-secondary-200/30 rounded-full blur-3xl animate-pulse"></div>
+  <div class="absolute bottom-20 right-20 w-40 h-40 bg-primary-200/30 rounded-full blur-3xl animate-pulse" style="animation-delay: 1s"></div>
+
+  <div class="container-custom relative z-10">
+    <!-- Section Header -->
+    <div class="max-w-3xl mx-auto text-center mb-16 animate-on-scroll">
+      <div class="inline-flex items-center gap-2 px-4 py-2 bg-white/80 backdrop-blur-sm border border-secondary-100 rounded-full text-sm font-semibold mb-4 shadow-sm">
+        <svg class="w-4 h-4 text-secondary-600" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+          <path stroke-linecap="round" stroke-linejoin="round" d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.247 18 16.5 18c-1.746 0-3.332.477-4.5 1.253" />
+        </svg>
+        <span class="text-secondary-700">Propuesta Educativa</span>
+      </div>
+      <h2 class="text-3xl sm:text-4xl lg:text-5xl font-display font-bold text-gray-900 mb-6">
+        Niveles <span class="text-gradient">Educativos</span>
+      </h2>
+      <p class="text-lg text-gray-600 leading-relaxed">
+        Ofrecemos una formación integral en cada etapa del desarrollo, acompañando a
+        nuestros alumnos desde la infancia hasta la preparación universitaria.
+      </p>
+    </div>
+
+    <!-- Bento Grid Layout -->
+    <div class="grid lg:grid-cols-2 gap-8">
+      {niveles.map((nivel, index) => (
+        <article
+          class={`group relative overflow-hidden rounded-3xl ${colorClasses[nivel.color].bg} border ${colorClasses[nivel.color].border} p-8 lg:p-10 transition-all duration-500 hover:shadow-2xl hover:-translate-y-2 animate-on-scroll`}
+          style={`animation-delay: ${index * 0.15}s`}
+        >
+          <!-- Background Pattern -->
+          <div class="absolute top-0 right-0 w-64 h-64 bg-gradient-to-br opacity-10 rounded-full -translate-y-1/2 translate-x-1/2"
+               class:list={[`${colorClasses[nivel.color].gradient}`]}></div>
+
+          <!-- Icon -->
+          <div class={`w-16 h-16 bg-gradient-to-br ${colorClasses[nivel.color].gradient} rounded-2xl flex items-center justify-center mb-6 shadow-lg group-hover:scale-110 transition-transform duration-300`}>
+            <svg class="w-8 h-8 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5">
+              <path stroke-linecap="round" stroke-linejoin="round" d={iconPaths[nivel.icono]} />
+            </svg>
+          </div>
+
+          <!-- Content -->
+          <div class="relative z-10">
+            <div class="flex items-center gap-3 mb-4">
+              <h3 class="text-2xl lg:text-3xl font-display font-bold text-gray-900">
+                {nivel.nombre}
+              </h3>
+              <span class={`px-3 py-1 ${colorClasses[nivel.color].light} ${colorClasses[nivel.color].text} rounded-full text-sm font-medium`}>
+                {nivel.edades}
+              </span>
+            </div>
+
+            <p class="text-gray-600 leading-relaxed mb-6 text-lg">
+              {nivel.descripcion}
+            </p>
+
+            <!-- Features List -->
+            <ul class="space-y-3 mb-8">
+              {nivel.caracteristicas.map((caracteristica) => (
+                <li class="flex items-center gap-3">
+                  <div class={`w-5 h-5 ${colorClasses[nivel.color].light} rounded-full flex items-center justify-center flex-shrink-0`}>
+                    <svg class={`w-3 h-3 ${colorClasses[nivel.color].text}`} fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="3">
+                      <path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7" />
+                    </svg>
+                  </div>
+                  <span class="text-gray-700">{caracteristica}</span>
+                </li>
+              ))}
+            </ul>
+
+            <!-- CTAs -->
+            <div class="flex flex-wrap gap-3">
+              <a
+                href={nivel.href}
+                class={`inline-flex items-center gap-2 px-6 py-3 font-semibold rounded-xl transition-all duration-300 ${colorClasses[nivel.color].button} hover:-translate-y-0.5 shadow-lg hover:shadow-xl`}
+              >
+                Conocer más
+                <svg class="w-4 h-4 group-hover:translate-x-1 transition-transform" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                  <path stroke-linecap="round" stroke-linejoin="round" d="M17 8l4 4m0 0l-4 4m4-4H3" />
+                </svg>
+              </a>
+              <a
+                href="#contacto"
+                class={`inline-flex items-center gap-2 px-6 py-3 font-semibold rounded-xl transition-all duration-300 bg-white ${colorClasses[nivel.color].text} border-2 ${colorClasses[nivel.color].border} hover:shadow-lg hover:-translate-y-0.5`}
+              >
+                <svg class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                  <path stroke-linecap="round" stroke-linejoin="round" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z" />
+                </svg>
+                Consultar
+              </a>
+            </div>
+          </div>
+        </article>
+      ))}
+    </div>
+
+    <!-- Additional Info Banner -->
+    <div class="mt-16 bg-gradient-to-r from-primary-600 via-primary-700 to-primary-800 rounded-3xl p-8 lg:p-12 text-white relative overflow-hidden">
+      <!-- Pattern -->
+      <div class="absolute inset-0 opacity-10">
+        <div class="absolute top-0 left-0 w-40 h-40 bg-white rounded-full -translate-x-1/2 -translate-y-1/2"></div>
+        <div class="absolute bottom-0 right-0 w-60 h-60 bg-white rounded-full translate-x-1/3 translate-y-1/3"></div>
+      </div>
+
+      <div class="relative z-10 flex flex-col lg:flex-row items-center justify-between gap-8">
+        <div class="text-center lg:text-left">
+          <h3 class="text-2xl lg:text-3xl font-display font-bold mb-3">
+            ¿Querés conocer nuestra propuesta educativa?
+          </h3>
+          <p class="text-primary-100 text-lg max-w-2xl">
+            Agendá una entrevista con nuestro equipo directivo y conocé nuestras instalaciones.
+            Te acompañamos en el proceso de admisión.
+          </p>
+        </div>
+        <a
+          href="https://docs.google.com/forms/d/e/1FAIpQLSe71-Th8mRRYIxWh2k52RKWBg3SMiBx1iGAd3-AiRe7MgbHCg/viewform"
+          target="_blank"
+          rel="noopener noreferrer"
+          class="btn-accent text-base flex-shrink-0"
+        >
+          <svg class="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+            <path stroke-linecap="round" stroke-linejoin="round" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z" />
+          </svg>
+          Agendar Entrevista
+        </a>
+      </div>
+    </div>
+  </div>
+</section>

@@ -1,0 +1,614 @@
+---
+import Layout from '@layouts/Layout.astro';
+
+const programas = [
+  {
+    titulo: "Orientación Vocacional",
+    descripcion: "Prácticas laborales en empresas de primera línea, simulacros de entrevistas y pasantías internacionales.",
+    icono: "briefcase"
+  },
+  {
+    titulo: "Exámenes Internacionales",
+    descripcion: "Preparación para PET, FCE, IGCSE y CAE con certificación Cambridge y proyectos internacionales.",
+    icono: "globe"
+  },
+  {
+    titulo: "Desarrollo Personal",
+    descripcion: "Proyecto pedagógico enfocado en inteligencia emocional, pensamiento crítico y habilidades sociales.",
+    icono: "heart"
+  },
+  {
+    titulo: "Aprendizaje-Servicio",
+    descripcion: "Proyectos solidarios que desarrollan habilidades en situaciones reales de la comunidad.",
+    icono: "users"
+  },
+  {
+    titulo: "Participación Ciudadana",
+    descripcion: "Parlamento Juvenil, Consejo Estudiantil, debates y TED Talks para formar ciudadanos activos.",
+    icono: "megaphone"
+  },
+  {
+    titulo: "Cuidado Ambiental",
+    descripcion: "Programa GLOBE (NASA), reciclaje y Feria Ambiental para la conciencia ecológica.",
+    icono: "leaf"
+  }
+];
+
+const proyectosSolidarios = [
+  {
+    nombre: "Derechos de Personas con Discapacidad",
+    descripcion: "Programa con ONG CILSA y la Municipalidad de Vicente López para trabajar la inclusión.",
+    icono: "accessibility"
+  },
+  {
+    nombre: "Derechos de Adultos Mayores",
+    descripcion: "Actividades en Residencia La Oliva y Centros de Día con componente teórico-práctico.",
+    icono: "elderly"
+  },
+  {
+    nombre: "Derechos del Niño",
+    descripcion: "Colaboración con Hogar Querubines y ONG La Chata Solidaria, incluyendo viajes solidarios al Chaco.",
+    icono: "child"
+  }
+];
+
+const examenes = [
+  { nombre: "P.E.T.", año: "1° Año" },
+  { nombre: "F.C.E.", año: "3° Año" },
+  { nombre: "IGCSE", año: "4° y 5° Año" },
+  { nombre: "C.A.E.", año: "6° Año" },
+  { nombre: "I.P.Q.", año: "6° Año" }
+];
+
+const iconPaths: Record<string, string> = {
+  briefcase: "M20 7H4a2 2 0 00-2 2v10a2 2 0 002 2h16a2 2 0 002-2V9a2 2 0 00-2-2zM10 2h4a2 2 0 012 2v3H8V4a2 2 0 012-2z",
+  globe: "M21 12a9 9 0 01-9 9m9-9a9 9 0 00-9-9m9 9H3m9 9a9 9 0 01-9-9m9 9c1.657 0 3-4.03 3-9s-1.343-9-3-9m0 18c-1.657 0-3-4.03-3-9s1.343-9 3-9m-9 9a9 9 0 019-9",
+  heart: "M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z",
+  users: "M12 4.354a4 4 0 110 5.292M15 21H3v-1a6 6 0 0112 0v1zm0 0h6v-1a6 6 0 00-9-5.197M13 7a4 4 0 11-8 0 4 4 0 018 0z",
+  megaphone: "M11 5.882V19.24a1.76 1.76 0 01-3.417.592l-2.147-6.15M18 13a3 3 0 100-6M5.436 13.683A4.001 4.001 0 017 6h1.832c4.1 0 7.625-1.234 9.168-3v14c-1.543-1.766-5.067-3-9.168-3H7a3.988 3.988 0 01-1.564-.317z",
+  leaf: "M5 3v4M3 5h4M6 17v4m-2-2h4m5-16l2.286 6.857L21 12l-5.714 2.143L13 21l-2.286-6.857L5 12l5.714-2.143L13 3z",
+  accessibility: "M12 4.5a2.5 2.5 0 100 5 2.5 2.5 0 000-5zM8 14l4-1 4 1M12 13v6m-2 2l2-2 2 2",
+  elderly: "M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z",
+  child: "M12 4.354a4 4 0 110 5.292M15 21H3v-1a6 6 0 0112 0v1zm0 0h6v-1a6 6 0 00-9-5.197M13 7a4 4 0 11-8 0 4 4 0 018 0z"
+};
+---
+
+<Layout
+  title="Nivel Secundario"
+  description="Nivel Secundario de Learning Proyecto Integral. Bachiller en Comunicación con Proyecto Pedagógico Innovador Bilingüe. Exámenes internacionales, prácticas laborales y formación integral."
+>
+  <!-- Hero Section -->
+  <section class="relative pt-32 pb-20 overflow-hidden">
+    <div class="absolute inset-0 bg-gradient-to-br from-secondary-600 via-secondary-700 to-secondary-800"></div>
+    <div class="absolute inset-0 bg-pattern opacity-10"></div>
+
+    <!-- Decorative shapes with animations -->
+    <div class="absolute top-20 right-0 w-96 h-96 bg-white/10 rounded-full blur-3xl animate-pulse"></div>
+    <div class="absolute bottom-0 left-0 w-80 h-80 bg-primary-500/20 rounded-full blur-3xl animate-pulse" style="animation-delay: 1s"></div>
+    <div class="absolute top-1/2 right-1/4 w-32 h-32 bg-accent-400/20 rounded-full blur-2xl animate-float"></div>
+    <div class="absolute bottom-1/4 left-1/3 w-24 h-24 bg-white/10 rounded-full blur-xl animate-float" style="animation-delay: 2s"></div>
+
+    <div class="container-custom relative z-10">
+      <div class="max-w-4xl">
+        <!-- Breadcrumb -->
+        <nav class="flex items-center gap-2 text-sm text-secondary-200 mb-6">
+          <a href="/" class="hover:text-white transition-colors">Inicio</a>
+          <svg class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+            <path stroke-linecap="round" stroke-linejoin="round" d="M9 5l7 7-7 7" />
+          </svg>
+          <span class="text-white font-medium">Nivel Secundario</span>
+        </nav>
+
+        <span class="inline-block px-4 py-1.5 bg-white/20 backdrop-blur-sm text-white rounded-full text-sm font-semibold mb-6">
+          12 a 18 años
+        </span>
+
+        <h1 class="text-4xl sm:text-5xl lg:text-6xl font-display font-bold text-white mb-6">
+          Nivel Secundario
+        </h1>
+
+        <p class="text-xl text-secondary-100 leading-relaxed mb-4 max-w-2xl">
+          Bachiller en Comunicación con Proyecto Pedagógico Innovador Bilingüe en
+          <strong>Desarrollo y Crecimiento Personal</strong>.
+        </p>
+
+        <p class="text-lg text-secondary-200 leading-relaxed mb-8 max-w-2xl">
+          Formamos jóvenes con pensamiento crítico, capacidad analítica y competencias para una participación
+          social y cívica productiva dentro de un marco de honestidad y respeto.
+        </p>
+
+        <div class="flex flex-wrap gap-4">
+          <a href="#contacto" class="btn-accent">
+            <svg class="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+              <path stroke-linecap="round" stroke-linejoin="round" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z" />
+            </svg>
+            Solicitar Entrevista
+          </a>
+          <a href="#programas" class="btn-secondary bg-white/10 border-white/30 text-white hover:bg-white/20">
+            <svg class="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+              <path stroke-linecap="round" stroke-linejoin="round" d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2" />
+            </svg>
+            Ver Programas
+          </a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Título y DIEGEP -->
+  <section class="py-16 bg-white">
+    <div class="container-custom">
+      <div class="bg-gradient-to-r from-secondary-50 to-primary-50 rounded-3xl p-8 lg:p-12">
+        <div class="grid md:grid-cols-2 lg:grid-cols-4 gap-8 text-center">
+          <div>
+            <span class="block text-3xl font-display font-bold text-secondary-600">DIEGEP</span>
+            <span class="text-gray-600">7814</span>
+          </div>
+          <div>
+            <span class="block text-3xl font-display font-bold text-secondary-600">Bilingüe</span>
+            <span class="text-gray-600">Disp. 957/10</span>
+          </div>
+          <div>
+            <span class="block text-3xl font-display font-bold text-secondary-600">1° a 6°</span>
+            <span class="text-gray-600">Años</span>
+          </div>
+          <div>
+            <span class="block text-3xl font-display font-bold text-secondary-600">Cambridge</span>
+            <span class="text-gray-600">Certificación Internacional</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Propuesta Educativa -->
+  <section class="py-20 relative overflow-hidden">
+    <div class="absolute inset-0 bg-gradient-to-br from-white via-secondary-50/30 to-white"></div>
+    <div class="absolute top-20 left-10 w-40 h-40 bg-secondary-100/50 rounded-full blur-3xl"></div>
+    <div class="absolute bottom-20 right-10 w-32 h-32 bg-primary-100/50 rounded-full blur-3xl"></div>
+
+    <div class="container-custom relative z-10">
+      <div class="grid lg:grid-cols-2 gap-16 items-center">
+        <div class="animate-on-scroll">
+          <div class="inline-flex items-center gap-2 px-4 py-2 bg-white/80 backdrop-blur-sm border border-secondary-100 rounded-full text-sm font-semibold mb-4 shadow-sm">
+            <svg class="w-4 h-4 text-secondary-600" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+              <path stroke-linecap="round" stroke-linejoin="round" d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.247 18 16.5 18c-1.746 0-3.332.477-4.5 1.253" />
+            </svg>
+            <span class="text-secondary-700">Propuesta Educativa</span>
+          </div>
+          <h2 class="text-3xl sm:text-4xl font-display font-bold text-gray-900 mb-6">
+            Enseñanza para la <span class="text-gradient">Comprensión</span>
+          </h2>
+          <p class="text-lg text-gray-600 leading-relaxed mb-6">
+            Aplicamos la metodología del <strong>Proyecto Zero de Harvard</strong>, basada en tópicos generativos,
+            metas de comprensión, desempeños de comprensión y evaluación diagnóstica continua.
+          </p>
+          <p class="text-lg text-gray-600 leading-relaxed mb-6">
+            Nuestro enfoque desarrolla el proyecto vital de la persona, fomenta el pensamiento colaborativo,
+            el desarrollo integral del potencial, la autoevaluación y el cambio de hábitos.
+          </p>
+
+          <div class="space-y-4">
+            <div class="flex items-start gap-4">
+              <div class="w-10 h-10 bg-secondary-100 rounded-xl flex items-center justify-center flex-shrink-0">
+                <svg class="w-5 h-5 text-secondary-600" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                  <path stroke-linecap="round" stroke-linejoin="round" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
+                </svg>
+              </div>
+              <div>
+                <h4 class="font-semibold text-gray-900">Evaluación Formativa y Continua</h4>
+                <p class="text-gray-600 text-sm">Autoevaluación, evaluación entre pares y retroalimentación docente.</p>
+              </div>
+            </div>
+            <div class="flex items-start gap-4">
+              <div class="w-10 h-10 bg-secondary-100 rounded-xl flex items-center justify-center flex-shrink-0">
+                <svg class="w-5 h-5 text-secondary-600" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                  <path stroke-linecap="round" stroke-linejoin="round" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
+                </svg>
+              </div>
+              <div>
+                <h4 class="font-semibold text-gray-900">Trabajo Interdisciplinario</h4>
+                <p class="text-gray-600 text-sm">Soluciones en equipo para problemas del mundo moderno.</p>
+              </div>
+            </div>
+            <div class="flex items-start gap-4">
+              <div class="w-10 h-10 bg-secondary-100 rounded-xl flex items-center justify-center flex-shrink-0">
+                <svg class="w-5 h-5 text-secondary-600" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                  <path stroke-linecap="round" stroke-linejoin="round" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
+                </svg>
+              </div>
+              <div>
+                <h4 class="font-semibold text-gray-900">Visión Holística</h4>
+                <p class="text-gray-600 text-sm">Adaptabilidad, empatía, resiliencia, autonomía y creatividad.</p>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="relative bg-white rounded-2xl shadow-xl p-8 group hover:shadow-2xl transition-all duration-500">
+          <div class="absolute -inset-1 bg-gradient-to-r from-secondary-400 to-primary-400 rounded-2xl opacity-0 group-hover:opacity-10 blur-xl transition-opacity duration-500 -z-10"></div>
+          <h3 class="text-xl font-display font-bold text-gray-900 mb-6">Perfil del Egresado</h3>
+          <div class="space-y-4">
+            <p class="text-gray-600 leading-relaxed">
+              Un estudiante que ha desarrollado <strong>pensamiento crítico y capacidad analítica</strong>,
+              acreditando competentemente conocimientos que le permiten una participación social y cívica
+              productiva dentro de un marco de <strong>honestidad y respeto por el otro</strong>.
+            </p>
+            <div class="border-t pt-4 mt-4">
+              <h4 class="font-semibold text-gray-900 mb-3">Competencias desarrolladas:</h4>
+              <ul class="grid grid-cols-2 gap-2 text-sm text-gray-600">
+                <li class="flex items-center gap-2">
+                  <span class="w-2 h-2 bg-secondary-500 rounded-full"></span>
+                  Pensamiento crítico
+                </li>
+                <li class="flex items-center gap-2">
+                  <span class="w-2 h-2 bg-secondary-500 rounded-full"></span>
+                  Trabajo en equipo
+                </li>
+                <li class="flex items-center gap-2">
+                  <span class="w-2 h-2 bg-secondary-500 rounded-full"></span>
+                  Comunicación efectiva
+                </li>
+                <li class="flex items-center gap-2">
+                  <span class="w-2 h-2 bg-secondary-500 rounded-full"></span>
+                  Inteligencia emocional
+                </li>
+                <li class="flex items-center gap-2">
+                  <span class="w-2 h-2 bg-secondary-500 rounded-full"></span>
+                  Liderazgo
+                </li>
+                <li class="flex items-center gap-2">
+                  <span class="w-2 h-2 bg-secondary-500 rounded-full"></span>
+                  Responsabilidad social
+                </li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Programas -->
+  <section id="programas" class="py-20 bg-white relative overflow-hidden">
+    <div class="absolute top-10 right-20 w-48 h-48 bg-primary-100/40 rounded-full blur-3xl animate-pulse"></div>
+    <div class="absolute bottom-10 left-20 w-36 h-36 bg-secondary-100/40 rounded-full blur-3xl animate-pulse" style="animation-delay: 1.5s"></div>
+
+    <div class="container-custom relative z-10">
+      <div class="text-center max-w-3xl mx-auto mb-16 animate-on-scroll">
+        <div class="inline-flex items-center gap-2 px-4 py-2 bg-white/80 backdrop-blur-sm border border-primary-100 rounded-full text-sm font-semibold mb-4 shadow-sm">
+          <svg class="w-4 h-4 text-primary-600" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+            <path stroke-linecap="round" stroke-linejoin="round" d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2" />
+          </svg>
+          <span class="text-primary-700">Nuestros Programas</span>
+        </div>
+        <h2 class="text-3xl sm:text-4xl font-display font-bold text-gray-900 mb-6">
+          Formación <span class="text-gradient">integral</span> para el futuro
+        </h2>
+        <p class="text-lg text-gray-600">
+          Programas diseñados para desarrollar todas las dimensiones de nuestros estudiantes.
+        </p>
+      </div>
+
+      <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+        {programas.map((programa, index) => (
+          <div
+            class="group card-glass p-8 animate-on-scroll hover:-translate-y-2 hover:shadow-2xl transition-all duration-500"
+            style={`animation-delay: ${index * 0.1}s`}
+          >
+            <div class="w-14 h-14 bg-secondary-100 rounded-2xl flex items-center justify-center mb-6 group-hover:scale-110 transition-transform duration-300">
+              <svg class="w-7 h-7 text-secondary-600" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5">
+                <path stroke-linecap="round" stroke-linejoin="round" d={iconPaths[programa.icono]} />
+              </svg>
+            </div>
+            <h3 class="text-xl font-display font-bold text-gray-900 mb-3 group-hover:text-secondary-600 transition-colors">
+              {programa.titulo}
+            </h3>
+            <p class="text-gray-600 leading-relaxed">
+              {programa.descripcion}
+            </p>
+            <div class="h-1 w-0 group-hover:w-full bg-gradient-to-r from-secondary-400 to-primary-400 rounded-full mt-4 transition-all duration-500"></div>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- Exámenes Internacionales -->
+  <section class="py-16 section-gradient">
+    <div class="container-custom">
+      <div class="bg-white rounded-3xl shadow-xl p-8 lg:p-12">
+        <div class="grid lg:grid-cols-2 gap-12 items-center">
+          <div>
+            <span class="inline-block px-4 py-1.5 bg-accent-100 text-accent-700 rounded-full text-sm font-semibold mb-4">
+              Certificaciones
+            </span>
+            <h2 class="text-3xl font-display font-bold text-gray-900 mb-6">
+              Exámenes Internacionales
+            </h2>
+            <p class="text-gray-600 leading-relaxed mb-6">
+              Preparamos a nuestros estudiantes para certificaciones internacionales reconocidas mundialmente,
+              incluyendo <strong>Cambridge Assessment</strong> e <strong>IGCSE</strong>.
+            </p>
+            <p class="text-gray-600 leading-relaxed">
+              El programa IGCSE incluye: Language (First Language English & Spanish), Art & Design,
+              Environmental Management, Math, Business y Literature.
+            </p>
+          </div>
+
+          <div class="grid grid-cols-2 sm:grid-cols-3 gap-4">
+            {examenes.map((examen) => (
+              <div class="bg-gradient-to-br from-secondary-50 to-primary-50 rounded-xl p-4 text-center">
+                <span class="block text-2xl font-display font-bold text-secondary-600">{examen.nombre}</span>
+                <span class="text-sm text-gray-600">{examen.año}</span>
+              </div>
+            ))}
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Orientación Vocacional -->
+  <section class="py-20 bg-white">
+    <div class="container-custom">
+      <div class="grid lg:grid-cols-2 gap-16 items-center">
+        <div class="order-2 lg:order-1">
+          <div class="bg-gradient-to-br from-primary-600 to-secondary-600 rounded-2xl p-8 text-white">
+            <h3 class="text-2xl font-display font-bold mb-6">Prácticas Laborales</h3>
+            <p class="text-primary-100 mb-6">
+              Modelo de <strong>aprendizaje haciendo</strong> para preparar estudiantes para el mercado laboral.
+            </p>
+            <div class="space-y-3">
+              <div class="flex items-center gap-3">
+                <svg class="w-5 h-5 text-accent-400" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                  <path stroke-linecap="round" stroke-linejoin="round" d="M9 12l2 2 4-4" />
+                </svg>
+                <span>Prácticas en Toyota, UAI, Municipalidad de Vicente López</span>
+              </div>
+              <div class="flex items-center gap-3">
+                <svg class="w-5 h-5 text-accent-400" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                  <path stroke-linecap="round" stroke-linejoin="round" d="M9 12l2 2 4-4" />
+                </svg>
+                <span>Pasantías internacionales en Minnesota, USA</span>
+              </div>
+              <div class="flex items-center gap-3">
+                <svg class="w-5 h-5 text-accent-400" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                  <path stroke-linecap="round" stroke-linejoin="round" d="M9 12l2 2 4-4" />
+                </svg>
+                <span>Talleres de CV y entrevistas laborales</span>
+              </div>
+              <div class="flex items-center gap-3">
+                <svg class="w-5 h-5 text-accent-400" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                  <path stroke-linecap="round" stroke-linejoin="round" d="M9 12l2 2 4-4" />
+                </svg>
+                <span>Charlas de profesionales y egresados</span>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="order-1 lg:order-2">
+          <span class="inline-block px-4 py-1.5 bg-primary-100 text-primary-700 rounded-full text-sm font-semibold mb-4">
+            Orientación Vocacional
+          </span>
+          <h2 class="text-3xl sm:text-4xl font-display font-bold text-gray-900 mb-6">
+            Preparación para el <span class="text-gradient">mundo laboral</span>
+          </h2>
+          <p class="text-lg text-gray-600 leading-relaxed mb-6">
+            Nuestro programa de orientación vocacional prepara a los estudiantes para una participación
+            productiva en el mercado laboral, complementando su formación académica con experiencias reales.
+          </p>
+          <p class="text-lg text-gray-600 leading-relaxed">
+            Incluye simulacros de entrevistas con consultoras, procesos de selección vía Skype para
+            pasantías internacionales con <strong>Concordia Languages (Minnesota, USA)</strong>, y
+            talleres especializados.
+          </p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Proyectos Solidarios -->
+  <section class="py-20 section-gradient">
+    <div class="container-custom">
+      <div class="text-center max-w-3xl mx-auto mb-16">
+        <span class="inline-block px-4 py-1.5 bg-accent-100 text-accent-700 rounded-full text-sm font-semibold mb-4">
+          Aprendizaje-Servicio
+        </span>
+        <h2 class="text-3xl sm:text-4xl font-display font-bold text-gray-900 mb-6">
+          Proyectos <span class="text-gradient">Solidarios</span>
+        </h2>
+        <p class="text-lg text-gray-600">
+          Desarrollamos habilidades personales y sociales a través de proyectos que responden
+          a necesidades reales de la comunidad.
+        </p>
+      </div>
+
+      <div class="grid md:grid-cols-3 gap-8">
+        {proyectosSolidarios.map((proyecto, index) => (
+          <div class="group bg-white rounded-2xl shadow-lg p-8 animate-on-scroll hover:-translate-y-2 hover:shadow-2xl transition-all duration-500" style={`animation-delay: ${index * 0.1}s`}>
+            <div class="w-14 h-14 bg-accent-100 rounded-2xl flex items-center justify-center mb-6 group-hover:scale-110 transition-transform duration-300">
+              <svg class="w-7 h-7 text-accent-600" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5">
+                <path stroke-linecap="round" stroke-linejoin="round" d={iconPaths[proyecto.icono]} />
+              </svg>
+            </div>
+            <h3 class="text-xl font-display font-bold text-gray-900 mb-3 group-hover:text-accent-600 transition-colors">
+              {proyecto.nombre}
+            </h3>
+            <p class="text-gray-600 leading-relaxed">
+              {proyecto.descripcion}
+            </p>
+            <div class="h-1 w-0 group-hover:w-full bg-gradient-to-r from-accent-400 to-accent-600 rounded-full mt-4 transition-all duration-500"></div>
+          </div>
+        ))}
+      </div>
+
+      <div class="mt-12 bg-white rounded-2xl shadow-lg p-8">
+        <div class="flex flex-col lg:flex-row items-center gap-6">
+          <div class="w-20 h-20 bg-gradient-to-br from-accent-500 to-accent-600 rounded-2xl flex items-center justify-center flex-shrink-0">
+            <svg class="w-10 h-10 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5">
+              <path stroke-linecap="round" stroke-linejoin="round" d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z" />
+            </svg>
+          </div>
+          <div>
+            <h3 class="text-xl font-display font-bold text-gray-900 mb-2">
+              La Chata Solidaria - Viaje al Chaco Impenetrable
+            </h3>
+            <p class="text-gray-600">
+              En 2022 realizamos nuestro primer viaje solidario al Chaco Impenetrable, colaborando con la
+              ONG La Chata Solidaria para reflexionar sobre las condiciones de vida y necesidades básicas
+              como vivienda digna. Una experiencia transformadora que fomenta la empatía y el compromiso social.
+            </p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Participación Ciudadana -->
+  <section class="py-20 bg-white">
+    <div class="container-custom">
+      <div class="text-center max-w-3xl mx-auto mb-16">
+        <span class="inline-block px-4 py-1.5 bg-secondary-100 text-secondary-700 rounded-full text-sm font-semibold mb-4">
+          Formación Cívica
+        </span>
+        <h2 class="text-3xl sm:text-4xl font-display font-bold text-gray-900 mb-6">
+          Participación <span class="text-gradient">Ciudadana</span>
+        </h2>
+        <p class="text-lg text-gray-600">
+          Formamos ciudadanos activos y comprometidos con la democracia.
+        </p>
+      </div>
+
+      <div class="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
+        <div class="bg-gradient-to-br from-secondary-50 to-secondary-100 rounded-2xl p-6 text-center">
+          <div class="w-12 h-12 bg-secondary-500 rounded-xl flex items-center justify-center mx-auto mb-4">
+            <svg class="w-6 h-6 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+              <path stroke-linecap="round" stroke-linejoin="round" d="M19 21V5a2 2 0 00-2-2H7a2 2 0 00-2 2v16m14 0h2m-2 0h-5m-9 0H3m2 0h5M9 7h1m-1 4h1m4-4h1m-1 4h1m-5 10v-5a1 1 0 011-1h2a1 1 0 011 1v5m-4 0h4" />
+            </svg>
+          </div>
+          <h3 class="font-display font-bold text-gray-900 mb-2">Parlamento Juvenil</h3>
+          <p class="text-sm text-gray-600">Ganadores los últimos 3 años consecutivos</p>
+        </div>
+
+        <div class="bg-gradient-to-br from-primary-50 to-primary-100 rounded-2xl p-6 text-center">
+          <div class="w-12 h-12 bg-primary-500 rounded-xl flex items-center justify-center mx-auto mb-4">
+            <svg class="w-6 h-6 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+              <path stroke-linecap="round" stroke-linejoin="round" d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z" />
+            </svg>
+          </div>
+          <h3 class="font-display font-bold text-gray-900 mb-2">Consejo Estudiantil</h3>
+          <p class="text-sm text-gray-600">Estudiantes como agentes de cambio</p>
+        </div>
+
+        <div class="bg-gradient-to-br from-accent-50 to-accent-100 rounded-2xl p-6 text-center">
+          <div class="w-12 h-12 bg-accent-500 rounded-xl flex items-center justify-center mx-auto mb-4">
+            <svg class="w-6 h-6 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+              <path stroke-linecap="round" stroke-linejoin="round" d="M8 12h.01M12 12h.01M16 12h.01M21 12c0 4.418-4.03 8-9 8a9.863 9.863 0 01-4.255-.949L3 20l1.395-3.72C3.512 15.042 3 13.574 3 12c0-4.418 4.03-8 9-8s9 3.582 9 8z" />
+            </svg>
+          </div>
+          <h3 class="font-display font-bold text-gray-900 mb-2">Debates</h3>
+          <p class="text-sm text-gray-600">Pensamiento crítico y oratoria</p>
+        </div>
+
+        <div class="bg-gradient-to-br from-red-50 to-red-100 rounded-2xl p-6 text-center">
+          <div class="w-12 h-12 bg-red-500 rounded-xl flex items-center justify-center mx-auto mb-4">
+            <svg class="w-6 h-6 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+              <path stroke-linecap="round" stroke-linejoin="round" d="M15 10l4.553-2.276A1 1 0 0121 8.618v6.764a1 1 0 01-1.447.894L15 14M5 18h8a2 2 0 002-2V8a2 2 0 00-2-2H5a2 2 0 00-2 2v8a2 2 0 002 2z" />
+            </svg>
+          </div>
+          <h3 class="font-display font-bold text-gray-900 mb-2">TED Talks</h3>
+          <p class="text-sm text-gray-600">Comunicación de ideas propias</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Articulación con Universidad -->
+  <section class="py-16 section-gradient">
+    <div class="container-custom">
+      <div class="bg-gradient-to-r from-primary-600 to-secondary-600 rounded-3xl p-8 lg:p-12 text-white">
+        <div class="grid lg:grid-cols-2 gap-8 items-center">
+          <div>
+            <h2 class="text-3xl font-display font-bold mb-6">
+              Articulación con el Nivel Superior
+            </h2>
+            <p class="text-primary-100 mb-6">
+              Preparamos a nuestros estudiantes para la transición a la universidad con programas
+              específicos que facilitan su ingreso y adaptación al nivel superior.
+            </p>
+          </div>
+          <div class="grid sm:grid-cols-2 gap-4">
+            <div class="bg-white/10 backdrop-blur-sm rounded-xl p-6">
+              <h3 class="font-display font-bold text-lg mb-2">UBA XXI</h3>
+              <p class="text-sm text-primary-100">
+                Preparación para materias comunes de todas las carreras UBA: Pensamiento Científico y Sociedad y Estado.
+              </p>
+            </div>
+            <div class="bg-white/10 backdrop-blur-sm rounded-xl p-6">
+              <h3 class="font-display font-bold text-lg mb-2">Matemática CBC</h3>
+              <p class="text-sm text-primary-100">
+                Desde 4° año, trabajo con bibliografía del CBC: cálculo, álgebra, estadística y representaciones gráficas.
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- CTA -->
+  <section id="contacto" class="py-20 bg-white">
+    <div class="container-custom">
+      <div class="bg-gradient-to-r from-secondary-600 via-secondary-700 to-secondary-800 rounded-3xl p-8 lg:p-16 text-center relative overflow-hidden">
+        <div class="absolute inset-0 opacity-10">
+          <div class="absolute top-0 left-0 w-40 h-40 bg-white rounded-full -translate-x-1/2 -translate-y-1/2"></div>
+          <div class="absolute bottom-0 right-0 w-60 h-60 bg-white rounded-full translate-x-1/3 translate-y-1/3"></div>
+        </div>
+
+        <div class="relative z-10 max-w-2xl mx-auto">
+          <h2 class="text-3xl lg:text-4xl font-display font-bold text-white mb-6">
+            ¿Querés conocer nuestra propuesta para Secundaria?
+          </h2>
+          <p class="text-secondary-100 text-lg mb-8">
+            Agendá una entrevista con nuestro equipo directivo y conocé nuestras instalaciones.
+            Te acompañamos en todo el proceso de admisión.
+          </p>
+          <div class="flex flex-col sm:flex-row justify-center gap-4">
+            <a
+              href="https://docs.google.com/forms/d/e/1FAIpQLSe71-Th8mRRYIxWh2k52RKWBg3SMiBx1iGAd3-AiRe7MgbHCg/viewform"
+              target="_blank"
+              rel="noopener noreferrer"
+              class="btn-accent text-base"
+            >
+              <svg class="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                <path stroke-linecap="round" stroke-linejoin="round" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z" />
+              </svg>
+              Agendar Entrevista
+            </a>
+            <a href="/#contacto" class="btn-secondary bg-white/10 border-white/30 text-white hover:bg-white/20">
+              <svg class="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                <path stroke-linecap="round" stroke-linejoin="round" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" />
+              </svg>
+              Enviar Consulta
+            </a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+</Layout>
+
+<style>
+  .animate-float {
+    animation: float 6s ease-in-out infinite;
+  }
+
+  @keyframes float {
+    0%, 100% { transform: translateY(0) translateX(0); }
+    25% { transform: translateY(-15px) translateX(10px); }
+    50% { transform: translateY(-5px) translateX(-5px); }
+    75% { transform: translateY(-20px) translateX(5px); }
+  }
+</style>

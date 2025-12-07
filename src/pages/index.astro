@@ -1,0 +1,34 @@
+---
+import Layout from '@layouts/Layout.astro';
+import Hero from '@components/Hero.astro';
+import AboutSection from '@components/AboutSection.astro';
+import EventosDestacados from '@components/EventosDestacados.astro';
+import NivelesGrid from '@components/NivelesGrid.astro';
+import NoticiasSection from '@components/NoticiasSection.astro';
+import ContactSection from '@components/ContactSection.astro';
+import { obtenerPublicacionInscripcion } from '@lib/supabase';
+
+// Obtener la publicación de inscripción activa
+const inscripcion = await obtenerPublicacionInscripcion();
+---
+
+<Layout
+  title="Inicio"
+  description="Learning Proyecto Integral - Institución educativa comprometida con el desarrollo integral de cada alumno. Niveles Primario y Secundario en un ambiente de excelencia académica y calidez humana."
+>
+  <Hero
+    ctaText="Solicitar Entrevista"
+    ctaHref="#contacto"
+    inscripcion={inscripcion}
+  />
+
+  <AboutSection />
+
+  <EventosDestacados />
+
+  <NivelesGrid />
+
+  <NoticiasSection />
+
+  <ContactSection />
+</Layout>

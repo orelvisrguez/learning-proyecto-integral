@@ -1,0 +1,359 @@
+---
+// Marcar esta página como renderizada en servidor (no estática)
+export const prerender = false;
+
+import Layout from '@layouts/Layout.astro';
+import { obtenerNoticiaPorSlug } from '@lib/supabase';
+
+// Obtener el slug de la URL
+const { slug } = Astro.params;
+
+// Obtener la noticia de Supabase
+const noticia = await obtenerNoticiaPorSlug(slug || '');
+
+// Si no existe la noticia, redirigir a 404
+if (!noticia) {
+  return Astro.redirect('/404');
+}
+
+const categoriaStyles: Record<string, { bg: string; text: string; bgLight: string; label: string; icon: string; gradient: string }> = {
+  evento: {
+    bg: "bg-purple-600",
+    text: "text-purple-600",
+    bgLight: "bg-purple-100",
+    label: "Evento",
+    icon: "M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z",
+    gradient: "from-purple-500 to-indigo-600"
+  },
+  noticia: {
+    bg: "bg-blue-600",
+    text: "text-blue-600",
+    bgLight: "bg-blue-100",
+    label: "Noticia",
+    icon: "M19 20H5a2 2 0 01-2-2V6a2 2 0 012-2h10a2 2 0 012 2v1m2 13a2 2 0 01-2-2V7m2 13a2 2 0 002-2V9a2 2 0 00-2-2h-2m-4-3H9M7 16h6M7 8h6v4H7V8z",
+    gradient: "from-blue-500 to-cyan-600"
+  },
+  logro: {
+    bg: "bg-green-600",
+    text: "text-green-600",
+    bgLight: "bg-green-100",
+    label: "Logro",
+    icon: "M9 12l2 2 4-4M7.835 4.697a3.42 3.42 0 001.946-.806 3.42 3.42 0 014.438 0 3.42 3.42 0 001.946.806 3.42 3.42 0 013.138 3.138 3.42 3.42 0 00.806 1.946 3.42 3.42 0 010 4.438 3.42 3.42 0 00-.806 1.946 3.42 3.42 0 01-3.138 3.138 3.42 3.42 0 00-1.946.806 3.42 3.42 0 01-4.438 0 3.42 3.42 0 00-1.946-.806 3.42 3.42 0 01-3.138-3.138 3.42 3.42 0 00-.806-1.946 3.42 3.42 0 010-4.438 3.42 3.42 0 00.806-1.946 3.42 3.42 0 013.138-3.138z",
+    gradient: "from-green-500 to-emerald-600"
+  },
+  anuncio: {
+    bg: "bg-accent-600",
+    text: "text-accent-600",
+    bgLight: "bg-accent-100",
+    label: "Anuncio",
+    icon: "M11 5.882V19.24a1.76 1.76 0 01-3.417.592l-2.147-6.15M18 13a3 3 0 100-6M5.436 13.683A4.001 4.001 0 017 6h1.832c4.1 0 7.625-1.234 9.168-3v14c-1.543-1.766-5.067-3-9.168-3H7a3.988 3.988 0 01-1.564-.317z",
+    gradient: "from-amber-500 to-orange-600"
+  },
+  inscripcion: {
+    bg: "bg-pink-600",
+    text: "text-pink-600",
+    bgLight: "bg-pink-100",
+    label: "Inscripción",
+    icon: "M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2m-3 7h3m-3 4h3m-6-4h.01M9 16h.01",
+    gradient: "from-pink-500 to-rose-600"
+  }
+};
+
+const formatDate = (dateString: string) => {
+  const date = new Date(dateString);
+  return date.toLocaleDateString('es-AR', {
+    day: 'numeric',
+    month: 'long',
+    year: 'numeric'
+  });
+};
+
+const categoria = categoriaStyles[noticia.categoria] || {
+  bg: "bg-gray-600",
+  text: "text-gray-600",
+  bgLight: "bg-gray-100",
+  label: "Publicación",
+  icon: "M19 20H5a2 2 0 01-2-2V6a2 2 0 012-2h10a2 2 0 012 2v1m2 13a2 2 0 01-2-2V7m2 13a2 2 0 002-2V9a2 2 0 00-2-2h-2m-4-3H9M7 16h6M7 8h6v4H7V8z",
+  gradient: "from-gray-500 to-gray-600"
+};
+---
+
+<Layout
+  title={noticia.titulo}
+  description={noticia.resumen}
+  solidHeader={true}
+>
+  <!-- Hero Section -->
+  <section class="relative pt-32 pb-20 overflow-hidden">
+    <div class="absolute inset-0 bg-gradient-to-br from-gray-900 via-primary-900 to-secondary-900"></div>
+    <div class="absolute inset-0 bg-pattern opacity-5"></div>
+
+    <!-- Animated particles -->
+    <div class="absolute inset-0 overflow-hidden">
+      <div class="absolute top-1/4 left-1/4 w-2 h-2 bg-primary-400 rounded-full animate-pulse"></div>
+      <div class="absolute top-1/3 right-1/3 w-3 h-3 bg-secondary-400 rounded-full animate-pulse" style="animation-delay: 0.5s"></div>
+      <div class="absolute bottom-1/4 left-1/2 w-2 h-2 bg-accent-400 rounded-full animate-pulse" style="animation-delay: 1s"></div>
+    </div>
+
+    <!-- Decorative shapes -->
+    <div class="absolute top-20 right-0 w-96 h-96 bg-primary-500/20 rounded-full blur-3xl animate-blob"></div>
+    <div class="absolute bottom-0 left-0 w-80 h-80 bg-secondary-500/20 rounded-full blur-3xl animate-blob" style="animation-delay: 2s"></div>
+
+    <div class="container-custom relative z-10">
+      <div class="max-w-4xl mx-auto">
+        <!-- Breadcrumb -->
+        <nav class="flex items-center gap-2 text-sm text-gray-400 mb-8" aria-label="Breadcrumb">
+          <a href="/" class="hover:text-white transition-colors">Inicio</a>
+          <svg class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+            <path stroke-linecap="round" stroke-linejoin="round" d="M9 5l7 7-7 7" />
+          </svg>
+          <a href="/novedades" class="hover:text-white transition-colors">Novedades</a>
+          <svg class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+            <path stroke-linecap="round" stroke-linejoin="round" d="M9 5l7 7-7 7" />
+          </svg>
+          <span class="text-white font-medium truncate max-w-xs">{noticia.titulo}</span>
+        </nav>
+
+        <!-- Category & Date -->
+        <div class="flex flex-wrap items-center gap-4 mb-6">
+          <span class={`inline-flex items-center gap-1.5 px-4 py-2 ${categoria.bgLight} ${categoria.text} rounded-full text-sm font-semibold`}>
+            <svg class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+              <path stroke-linecap="round" stroke-linejoin="round" d={categoria.icon} />
+            </svg>
+            {categoria.label}
+          </span>
+          <time class="text-gray-300 flex items-center gap-2" datetime={noticia.fecha_publicacion}>
+            <div class="w-8 h-8 bg-white/10 rounded-lg flex items-center justify-center">
+              <svg class="w-4 h-4 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                <path stroke-linecap="round" stroke-linejoin="round" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z" />
+              </svg>
+            </div>
+            {formatDate(noticia.fecha_publicacion)}
+          </time>
+        </div>
+
+        <!-- Title -->
+        <h1 class="text-3xl sm:text-4xl lg:text-5xl font-display font-bold text-white mb-6 leading-tight">
+          {noticia.titulo}
+        </h1>
+
+        <!-- Summary -->
+        <p class="text-xl text-gray-300 leading-relaxed">
+          {noticia.resumen}
+        </p>
+      </div>
+    </div>
+
+    <!-- Wave separator -->
+    <div class="absolute bottom-0 left-0 right-0">
+      <svg viewBox="0 0 1440 120" fill="none" xmlns="http://www.w3.org/2000/svg" class="w-full h-auto">
+        <path d="M0 120L60 105C120 90 240 60 360 45C480 30 600 30 720 37.5C840 45 960 60 1080 67.5C1200 75 1320 75 1380 75L1440 75V120H1380C1320 120 1200 120 1080 120C960 120 840 120 720 120C600 120 480 120 360 120C240 120 120 120 60 120H0Z" fill="white"/>
+      </svg>
+    </div>
+  </section>
+
+  <article class="py-16 bg-white">
+    <!-- Featured Image -->
+    {noticia.imagen_url && (
+      <div class="container-custom mb-16">
+        <div class="max-w-4xl mx-auto">
+          <div class="relative group">
+            <!-- Glow effect -->
+            <div class={`absolute -inset-2 bg-gradient-to-r ${categoria.gradient} rounded-3xl opacity-20 blur-xl group-hover:opacity-30 transition-opacity duration-500`}></div>
+            <img
+              src={noticia.imagen_url}
+              alt={noticia.titulo}
+              class="relative w-full h-auto rounded-2xl shadow-2xl"
+            />
+          </div>
+        </div>
+      </div>
+    )}
+
+    <!-- Content -->
+    <div class="container-custom">
+      <div class="max-w-3xl mx-auto">
+        <div class="prose prose-lg prose-primary max-w-none article-content" set:html={noticia.contenido} />
+
+        <!-- Share & Back -->
+        <div class="mt-16 pt-8 border-t border-gray-200">
+          <div class="flex flex-col sm:flex-row items-center justify-between gap-6">
+            <a
+              href="/novedades"
+              class="group inline-flex items-center gap-2 px-6 py-3 bg-gray-100 hover:bg-gray-200 text-gray-700 font-semibold rounded-xl transition-all duration-300"
+            >
+              <svg class="w-5 h-5 transform group-hover:-translate-x-1 transition-transform" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                <path stroke-linecap="round" stroke-linejoin="round" d="M10 19l-7-7m0 0l7-7m-7 7h18" />
+              </svg>
+              Volver a Novedades
+            </a>
+
+            <div class="flex items-center gap-4">
+              <span class="text-sm text-gray-500 font-medium">Compartir:</span>
+              <div class="flex items-center gap-2">
+                <a
+                  href={`https://www.facebook.com/sharer/sharer.php?u=${encodeURIComponent(Astro.url.href)}`}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  class="w-11 h-11 bg-gray-100 hover:bg-blue-600 hover:text-white text-gray-600 rounded-xl flex items-center justify-center transition-all duration-300 hover:scale-110 hover:shadow-lg"
+                  aria-label="Compartir en Facebook"
+                >
+                  <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24">
+                    <path d="M18.77 7.46H14.5v-1.9c0-.9.6-1.1 1-1.1h3V.5h-4.33C10.24.5 9.5 3.44 9.5 5.32v2.15h-3v4h3v12h5v-12h3.85l.42-4z"/>
+                  </svg>
+                </a>
+                <a
+                  href={`https://twitter.com/intent/tweet?url=${encodeURIComponent(Astro.url.href)}&text=${encodeURIComponent(noticia.titulo)}`}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  class="w-11 h-11 bg-gray-100 hover:bg-black hover:text-white text-gray-600 rounded-xl flex items-center justify-center transition-all duration-300 hover:scale-110 hover:shadow-lg"
+                  aria-label="Compartir en X"
+                >
+                  <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24">
+                    <path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/>
+                  </svg>
+                </a>
+                <a
+                  href={`https://wa.me/?text=${encodeURIComponent(noticia.titulo + ' ' + Astro.url.href)}`}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  class="w-11 h-11 bg-gray-100 hover:bg-green-600 hover:text-white text-gray-600 rounded-xl flex items-center justify-center transition-all duration-300 hover:scale-110 hover:shadow-lg"
+                  aria-label="Compartir en WhatsApp"
+                >
+                  <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24">
+                    <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/>
+                  </svg>
+                </a>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </article>
+
+  <!-- CTA Section -->
+  <section class="py-20 section-gradient">
+    <div class="container-custom">
+      <div class="relative bg-gradient-to-br from-gray-900 via-primary-900 to-secondary-900 rounded-3xl p-8 lg:p-16 text-center overflow-hidden">
+        <!-- Decorative elements -->
+        <div class="absolute inset-0 overflow-hidden">
+          <div class="absolute top-0 left-0 w-40 h-40 bg-primary-500/20 rounded-full blur-3xl"></div>
+          <div class="absolute bottom-0 right-0 w-60 h-60 bg-secondary-500/20 rounded-full blur-3xl"></div>
+          <div class="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-80 h-80 bg-accent-500/10 rounded-full blur-3xl"></div>
+        </div>
+
+        <div class="relative z-10 max-w-2xl mx-auto">
+          <div class="inline-flex items-center justify-center w-16 h-16 bg-white/10 backdrop-blur-sm rounded-2xl mb-8">
+            <svg class="w-8 h-8 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+              <path stroke-linecap="round" stroke-linejoin="round" d="M8 12h.01M12 12h.01M16 12h.01M21 12c0 4.418-4.03 8-9 8a9.863 9.863 0 01-4.255-.949L3 20l1.395-3.72C3.512 15.042 3 13.574 3 12c0-4.418 4.03-8 9-8s9 3.582 9 8z" />
+            </svg>
+          </div>
+
+          <h2 class="text-3xl lg:text-4xl font-display font-bold text-white mb-6">
+            ¿Te interesa conocer más sobre nuestro instituto?
+          </h2>
+          <p class="text-gray-300 text-lg mb-10">
+            Agendá una entrevista con nuestro equipo directivo y conocé nuestra propuesta educativa integral.
+          </p>
+
+          <div class="flex flex-col sm:flex-row items-center justify-center gap-4">
+            <a
+              href="/#contacto"
+              class="btn-accent text-base inline-flex"
+            >
+              <svg class="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                <path stroke-linecap="round" stroke-linejoin="round" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z" />
+              </svg>
+              Solicitar Entrevista
+            </a>
+            <a
+              href="/novedades"
+              class="inline-flex items-center gap-2 px-6 py-3 bg-white/10 hover:bg-white/20 backdrop-blur-sm text-white font-semibold rounded-xl transition-all duration-300"
+            >
+              Ver más novedades
+              <svg class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                <path stroke-linecap="round" stroke-linejoin="round" d="M17 8l4 4m0 0l-4 4m4-4H3" />
+              </svg>
+            </a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+</Layout>
+
+<style>
+  .animate-blob {
+    animation: blob 7s infinite;
+  }
+
+  @keyframes blob {
+    0% { transform: translate(0px, 0px) scale(1); }
+    33% { transform: translate(30px, -50px) scale(1.1); }
+    66% { transform: translate(-20px, 20px) scale(0.9); }
+    100% { transform: translate(0px, 0px) scale(1); }
+  }
+
+  /* Article Content Styles */
+  .article-content :global(h2) {
+    @apply text-2xl font-display font-bold text-gray-900 mt-10 mb-4;
+  }
+
+  .article-content :global(h3) {
+    @apply text-xl font-display font-bold text-gray-900 mt-8 mb-4;
+  }
+
+  .article-content :global(h4) {
+    @apply text-lg font-display font-semibold text-gray-900 mt-6 mb-3;
+  }
+
+  .article-content :global(p) {
+    @apply text-gray-600 leading-relaxed mb-4;
+  }
+
+  .article-content :global(ul),
+  .article-content :global(ol) {
+    @apply my-4 ml-6 space-y-2;
+  }
+
+  .article-content :global(li) {
+    @apply text-gray-600;
+  }
+
+  .article-content :global(ul li) {
+    @apply list-disc;
+  }
+
+  .article-content :global(ol li) {
+    @apply list-decimal;
+  }
+
+  .article-content :global(strong) {
+    @apply text-gray-900 font-semibold;
+  }
+
+  .article-content :global(a) {
+    @apply text-primary-600 hover:text-primary-700 underline transition-colors;
+  }
+
+  .article-content :global(blockquote) {
+    @apply border-l-4 border-primary-500 pl-4 py-2 my-6 bg-primary-50 rounded-r-lg italic text-gray-700;
+  }
+
+  .article-content :global(img) {
+    @apply rounded-xl shadow-lg my-6;
+  }
+
+  .article-content :global(pre) {
+    @apply bg-gray-900 text-gray-100 rounded-xl p-4 my-6 overflow-x-auto;
+  }
+
+  .article-content :global(code) {
+    @apply bg-gray-100 text-primary-600 px-1.5 py-0.5 rounded text-sm;
+  }
+
+  .article-content :global(pre code) {
+    @apply bg-transparent text-inherit p-0;
+  }
+</style>

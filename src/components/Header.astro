@@ -1,0 +1,341 @@
+---
+interface Props {
+  solidHeader?: boolean;
+}
+
+const { solidHeader = false } = Astro.props;
+
+const navLinks = [
+  { href: '/', label: 'Inicio' },
+  { href: '/nosotros', label: 'Nosotros' },
+  { href: '/primaria', label: 'Primaria' },
+  { href: '/secundaria', label: 'Secundaria' },
+  { href: '/proyectos', label: 'Proyectos' },
+  { href: '/novedades', label: 'Novedades' },
+];
+
+const currentPath = Astro.url.pathname;
+---
+
+<header
+  id="header"
+  class={`fixed top-0 left-0 right-0 z-50 transition-all duration-500 ${solidHeader ? 'scrolled' : ''}`}
+  data-solid-header={solidHeader.toString()}
+>
+  <!-- Header Background with Glass Effect -->
+  <div
+    id="header-bg"
+    class={`absolute inset-0 bg-white/95 backdrop-blur-xl border-b border-gray-200/50 shadow-lg shadow-black/5 transition-all duration-500 ${solidHeader ? 'opacity-100' : 'opacity-0'}`}
+  ></div>
+
+  <!-- Gradient line accent -->
+  <div class={`absolute bottom-0 left-0 right-0 h-[2px] bg-gradient-to-r from-transparent via-primary-500/50 to-transparent transition-opacity duration-500 ${solidHeader ? 'opacity-100' : 'opacity-0'}`} id="header-accent"></div>
+
+  <nav class="container-custom relative">
+    <div class="flex items-center justify-between h-20 lg:h-24">
+      <!-- Logo -->
+      <a href="/" class="flex items-center gap-3 group relative" aria-label="Ir al inicio">
+        <!-- Logo Icon with Glow -->
+        <div class="relative">
+          <div class="absolute inset-0 bg-primary-500 rounded-xl blur-lg opacity-0 group-hover:opacity-40 transition-opacity duration-300"></div>
+          <div class="relative w-12 h-12 bg-gradient-to-br from-primary-500 via-primary-600 to-primary-700 rounded-xl flex items-center justify-center shadow-xl shadow-primary-500/30 group-hover:shadow-primary-500/50 group-hover:scale-105 transition-all duration-300">
+            <span class="text-white font-display font-bold text-xl">L</span>
+          </div>
+        </div>
+        <!-- Logo Text -->
+        <div class="hidden sm:block">
+          <span class="block text-lg font-display font-bold leading-tight header-text-color transition-colors duration-300">
+            Learning
+          </span>
+          <span class="block text-xs font-medium tracking-wider header-subtext-color transition-colors duration-300">
+            Proyecto Integral
+          </span>
+        </div>
+      </a>
+
+      <!-- Desktop Navigation -->
+      <div class="hidden lg:flex items-center">
+        <div class="flex items-center bg-white/10 backdrop-blur-sm rounded-full px-2 py-1.5 nav-container transition-all duration-300">
+          {navLinks.map(link => (
+            <a
+              href={link.href}
+              class={`nav-link relative px-4 py-2 text-sm font-medium rounded-full transition-all duration-300 ${
+                currentPath === link.href
+                  ? 'nav-active'
+                  : 'nav-inactive'
+              }`}
+            >
+              {link.label}
+              {currentPath === link.href && (
+                <span class="absolute inset-0 bg-white/20 rounded-full -z-10"></span>
+              )}
+            </a>
+          ))}
+        </div>
+      </div>
+
+      <!-- CTA Button -->
+      <div class="hidden lg:flex items-center gap-4">
+        <a
+          href="#contacto"
+          class="group relative inline-flex items-center gap-2 px-6 py-3 overflow-hidden rounded-full font-semibold text-sm transition-all duration-300 cta-button"
+        >
+          <!-- Button Glow Effect -->
+          <span class="absolute inset-0 bg-gradient-to-r from-primary-600 to-primary-500 transition-all duration-300"></span>
+          <span class="absolute inset-0 bg-gradient-to-r from-primary-500 to-accent-500 opacity-0 group-hover:opacity-100 transition-opacity duration-300"></span>
+
+          <!-- Button Content -->
+          <span class="relative flex items-center gap-2 text-white">
+            <svg class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+              <path stroke-linecap="round" stroke-linejoin="round" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z" />
+            </svg>
+            <span>Solicitar Entrevista</span>
+            <svg class="w-4 h-4 transform group-hover:translate-x-1 transition-transform duration-300" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+              <path stroke-linecap="round" stroke-linejoin="round" d="M13 7l5 5m0 0l-5 5m5-5H6" />
+            </svg>
+          </span>
+        </a>
+      </div>
+
+      <!-- Mobile Menu Button -->
+      <button
+        id="mobile-menu-btn"
+        class="lg:hidden relative w-12 h-12 rounded-xl flex items-center justify-center mobile-menu-btn transition-all duration-300"
+        aria-label="Abrir menú"
+        aria-expanded="false"
+      >
+        <div class="relative w-6 h-5 flex flex-col justify-between">
+          <span id="bar-1" class="block h-0.5 w-6 rounded-full mobile-menu-bar transition-all duration-300 origin-center"></span>
+          <span id="bar-2" class="block h-0.5 w-6 rounded-full mobile-menu-bar transition-all duration-300"></span>
+          <span id="bar-3" class="block h-0.5 w-6 rounded-full mobile-menu-bar transition-all duration-300 origin-center"></span>
+        </div>
+      </button>
+    </div>
+
+    <!-- Mobile Menu -->
+    <div
+      id="mobile-menu"
+      class="lg:hidden absolute top-full left-4 right-4 bg-white/95 backdrop-blur-xl rounded-2xl border border-gray-200/50 shadow-2xl shadow-black/10
+             opacity-0 invisible -translate-y-4 scale-95 transition-all duration-300 overflow-hidden"
+    >
+      <!-- Decorative gradient -->
+      <div class="absolute top-0 left-0 right-0 h-1 bg-gradient-to-r from-primary-500 via-accent-500 to-secondary-500"></div>
+
+      <div class="p-6 flex flex-col gap-2">
+        {navLinks.map((link, index) => (
+          <a
+            href={link.href}
+            class={`mobile-nav-link px-5 py-4 rounded-xl font-medium transition-all duration-300 flex items-center justify-between group ${
+              currentPath === link.href
+                ? 'bg-primary-50 text-primary-600'
+                : 'text-gray-700 hover:bg-gray-50 hover:text-primary-600'
+            }`}
+            style={`animation-delay: ${index * 50}ms`}
+          >
+            <span>{link.label}</span>
+            <svg class="w-4 h-4 opacity-0 -translate-x-2 group-hover:opacity-100 group-hover:translate-x-0 transition-all duration-300" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+              <path stroke-linecap="round" stroke-linejoin="round" d="M9 5l7 7-7 7" />
+            </svg>
+          </a>
+        ))}
+
+        <div class="h-px bg-gradient-to-r from-transparent via-gray-200 to-transparent my-3"></div>
+
+        <a
+          href="#contacto"
+          class="flex items-center justify-center gap-2 px-6 py-4 bg-gradient-to-r from-primary-600 to-primary-500 text-white font-semibold rounded-xl shadow-lg shadow-primary-500/30 hover:shadow-xl hover:shadow-primary-500/40 hover:-translate-y-0.5 transition-all duration-300"
+        >
+          <svg class="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+            <path stroke-linecap="round" stroke-linejoin="round" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z" />
+          </svg>
+          Solicitar Entrevista
+        </a>
+      </div>
+    </div>
+  </nav>
+</header>
+
+<style>
+  /* Default state - transparent header for hero */
+  .header-text-color {
+    color: white;
+  }
+
+  .header-subtext-color {
+    color: rgba(255, 255, 255, 0.7);
+  }
+
+  .nav-container {
+    border: 1px solid rgba(255, 255, 255, 0.15);
+  }
+
+  .nav-inactive {
+    color: rgba(255, 255, 255, 0.9);
+  }
+
+  .nav-inactive:hover {
+    color: white;
+    background: rgba(255, 255, 255, 0.1);
+  }
+
+  .nav-active {
+    color: white;
+    background: rgba(255, 255, 255, 0.2);
+  }
+
+  .mobile-menu-btn {
+    background: rgba(255, 255, 255, 0.1);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+  }
+
+  .mobile-menu-btn:hover {
+    background: rgba(255, 255, 255, 0.2);
+  }
+
+  .mobile-menu-bar {
+    background: white;
+  }
+
+  .cta-button {
+    box-shadow: 0 10px 30px -5px rgba(37, 99, 235, 0.4);
+  }
+
+  .cta-button:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 15px 40px -5px rgba(37, 99, 235, 0.5);
+  }
+
+  /* Scrolled state - solid header */
+  #header.scrolled .header-text-color {
+    color: #111827;
+  }
+
+  #header.scrolled .header-subtext-color {
+    color: #6b7280;
+  }
+
+  #header.scrolled .nav-container {
+    background: rgba(243, 244, 246, 0.8);
+    border-color: rgba(229, 231, 235, 0.5);
+  }
+
+  #header.scrolled .nav-inactive {
+    color: #4b5563;
+  }
+
+  #header.scrolled .nav-inactive:hover {
+    color: #2563eb;
+    background: rgba(37, 99, 235, 0.1);
+  }
+
+  #header.scrolled .nav-active {
+    color: #2563eb;
+    background: rgba(37, 99, 235, 0.1);
+  }
+
+  #header.scrolled .mobile-menu-btn {
+    background: rgba(243, 244, 246, 0.8);
+    border-color: rgba(229, 231, 235, 0.5);
+  }
+
+  #header.scrolled .mobile-menu-btn:hover {
+    background: rgba(243, 244, 246, 1);
+  }
+
+  #header.scrolled .mobile-menu-bar {
+    background: #374151;
+  }
+
+  /* Animated hamburger */
+  #header.menu-open #bar-1 {
+    transform: translateY(8px) rotate(45deg);
+  }
+
+  #header.menu-open #bar-2 {
+    opacity: 0;
+    transform: scaleX(0);
+  }
+
+  #header.menu-open #bar-3 {
+    transform: translateY(-8px) rotate(-45deg);
+  }
+
+  /* Mobile nav link animation */
+  .mobile-nav-link {
+    animation: slideIn 0.3s ease-out forwards;
+    opacity: 0;
+    transform: translateX(-10px);
+  }
+
+  @keyframes slideIn {
+    to {
+      opacity: 1;
+      transform: translateX(0);
+    }
+  }
+</style>
+
+<script>
+  const header = document.getElementById('header');
+  const headerBg = document.getElementById('header-bg');
+  const headerAccent = document.getElementById('header-accent');
+  const isSolidHeader = header?.dataset.solidHeader === 'true';
+
+  function updateHeader() {
+    if (window.scrollY > 50 || isSolidHeader) {
+      headerBg?.classList.add('opacity-100');
+      headerAccent?.classList.add('opacity-100');
+      header?.classList.add('scrolled');
+    } else {
+      headerBg?.classList.remove('opacity-100');
+      headerAccent?.classList.remove('opacity-100');
+      header?.classList.remove('scrolled');
+    }
+  }
+
+  window.addEventListener('scroll', updateHeader, { passive: true });
+  updateHeader();
+
+  // Mobile menu toggle
+  const mobileMenuBtn = document.getElementById('mobile-menu-btn');
+  const mobileMenu = document.getElementById('mobile-menu');
+  let isMenuOpen = false;
+
+  mobileMenuBtn?.addEventListener('click', () => {
+    isMenuOpen = !isMenuOpen;
+
+    if (isMenuOpen) {
+      mobileMenu?.classList.remove('opacity-0', 'invisible', '-translate-y-4', 'scale-95');
+      mobileMenu?.classList.add('opacity-100', 'visible', 'translate-y-0', 'scale-100');
+      header?.classList.add('menu-open');
+      mobileMenuBtn.setAttribute('aria-expanded', 'true');
+    } else {
+      mobileMenu?.classList.add('opacity-0', 'invisible', '-translate-y-4', 'scale-95');
+      mobileMenu?.classList.remove('opacity-100', 'visible', 'translate-y-0', 'scale-100');
+      header?.classList.remove('menu-open');
+      mobileMenuBtn.setAttribute('aria-expanded', 'false');
+    }
+  });
+
+  // Close menu when clicking on links
+  mobileMenu?.querySelectorAll('a').forEach(link => {
+    link.addEventListener('click', () => {
+      isMenuOpen = false;
+      mobileMenu?.classList.add('opacity-0', 'invisible', '-translate-y-4', 'scale-95');
+      mobileMenu?.classList.remove('opacity-100', 'visible', 'translate-y-0', 'scale-100');
+      header?.classList.remove('menu-open');
+      mobileMenuBtn?.setAttribute('aria-expanded', 'false');
+    });
+  });
+
+  // Close menu when clicking outside
+  document.addEventListener('click', (e) => {
+    if (isMenuOpen && !header?.contains(e.target as Node)) {
+      isMenuOpen = false;
+      mobileMenu?.classList.add('opacity-0', 'invisible', '-translate-y-4', 'scale-95');
+      mobileMenu?.classList.remove('opacity-100', 'visible', 'translate-y-0', 'scale-100');
+      header?.classList.remove('menu-open');
+      mobileMenuBtn?.setAttribute('aria-expanded', 'false');
+    }
+  });
+</script>

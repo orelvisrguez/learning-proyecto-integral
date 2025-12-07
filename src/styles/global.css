@@ -1,0 +1,138 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Poppins:wght@500;600;700;800&display=swap');
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  html {
+    scroll-behavior: smooth;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
+
+  body {
+    @apply font-sans text-gray-700 bg-white;
+  }
+
+  h1, h2, h3, h4, h5, h6 {
+    @apply font-display font-bold text-gray-900;
+  }
+
+  ::selection {
+    @apply bg-primary-500 text-white;
+  }
+}
+
+@layer components {
+  /* Botones principales */
+  .btn-primary {
+    @apply inline-flex items-center justify-center gap-2 px-6 py-3
+           font-semibold text-white bg-primary-600 rounded-xl
+           transition-all duration-300 ease-out
+           hover:bg-primary-700 hover:shadow-lg hover:shadow-primary-500/25 hover:-translate-y-0.5
+           focus:outline-none focus:ring-2 focus:ring-primary-500 focus:ring-offset-2
+           active:scale-95;
+  }
+
+  .btn-secondary {
+    @apply inline-flex items-center justify-center gap-2 px-6 py-3
+           font-semibold text-primary-700 bg-primary-50 rounded-xl
+           border-2 border-primary-200
+           transition-all duration-300 ease-out
+           hover:bg-primary-100 hover:border-primary-300 hover:-translate-y-0.5
+           focus:outline-none focus:ring-2 focus:ring-primary-500 focus:ring-offset-2
+           active:scale-95;
+  }
+
+  .btn-accent {
+    @apply inline-flex items-center justify-center gap-2 px-6 py-3
+           font-semibold text-white bg-accent-500 rounded-xl
+           transition-all duration-300 ease-out
+           hover:bg-accent-600 hover:shadow-lg hover:shadow-accent-500/25 hover:-translate-y-0.5
+           focus:outline-none focus:ring-2 focus:ring-accent-500 focus:ring-offset-2
+           active:scale-95;
+  }
+
+  /* Cards con efecto glass */
+  .card-glass {
+    @apply bg-white/80 backdrop-blur-md rounded-2xl
+           border border-white/50 shadow-glass
+           transition-all duration-300;
+  }
+
+  .card-glass:hover {
+    @apply shadow-lg -translate-y-1;
+  }
+
+  /* Sección con gradiente */
+  .section-gradient {
+    @apply relative overflow-hidden;
+    background: linear-gradient(180deg, #f8fafc 0%, #ffffff 100%);
+  }
+
+  /* Texto con gradiente */
+  .text-gradient {
+    @apply bg-clip-text text-transparent bg-gradient-to-r from-primary-600 to-primary-800;
+  }
+
+  /* Decoración de fondo */
+  .bg-pattern {
+    background-image: radial-gradient(circle at 1px 1px, rgba(59, 130, 246, 0.08) 1px, transparent 0);
+    background-size: 24px 24px;
+  }
+
+  /* Link del nav */
+  .nav-link {
+    @apply relative text-gray-600 font-medium transition-colors duration-200
+           hover:text-primary-600;
+  }
+
+  .nav-link::after {
+    @apply absolute bottom-0 left-0 w-0 h-0.5 bg-primary-600
+           transition-all duration-300;
+    content: '';
+  }
+
+  .nav-link:hover::after {
+    @apply w-full;
+  }
+
+  /* Input styles */
+  .input-field {
+    @apply w-full px-4 py-3 bg-gray-50 border border-gray-200 rounded-xl
+           text-gray-700 placeholder-gray-400
+           transition-all duration-200
+           focus:bg-white focus:border-primary-500 focus:ring-2 focus:ring-primary-500/20
+           focus:outline-none;
+  }
+
+  /* Animaciones de entrada */
+  .animate-on-scroll {
+    @apply opacity-0 translate-y-8 transition-all duration-700 ease-out;
+  }
+
+  .animate-on-scroll.visible {
+    @apply opacity-100 translate-y-0;
+  }
+}
+
+@layer utilities {
+  /* Utilidades para grid de Bento */
+  .bento-grid {
+    display: grid;
+    gap: 1.5rem;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  }
+
+  @screen lg {
+    .bento-grid {
+      grid-template-columns: repeat(3, 1fr);
+    }
+  }
+
+  /* Responsive container */
+  .container-custom {
+    @apply w-full max-w-7xl mx-auto px-4 sm:px-6 lg:px-8;
+  }
+}

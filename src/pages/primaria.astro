@@ -1,0 +1,330 @@
+---
+import Layout from '@layouts/Layout.astro';
+
+const caracteristicas = [
+  {
+    titulo: "Aprendizaje Activo",
+    descripcion: "Metodología centrada en el alumno donde aprenden haciendo, investigando y colaborando con sus compañeros.",
+    icono: "users"
+  },
+  {
+    titulo: "Tecnología Educativa",
+    descripcion: "Aulas de informática equipadas para desarrollar competencias digitales desde temprana edad.",
+    icono: "computer"
+  },
+  {
+    titulo: "Inglés Cambridge",
+    descripcion: "Programa de inglés intensivo con certificación internacional Cambridge Assessment.",
+    icono: "globe"
+  },
+  {
+    titulo: "Educación en Valores",
+    descripcion: "Formación integral que promueve la paz, el respeto, la amistad y la solidaridad.",
+    icono: "heart"
+  },
+  {
+    titulo: "Arte y Expresión",
+    descripcion: "Teatro, música y artes plásticas para desarrollar la creatividad y la expresión personal.",
+    icono: "palette"
+  },
+  {
+    titulo: "Contacto con la Naturaleza",
+    descripcion: "Huerta escolar y proyectos ambientales para fomentar el cuidado del medio ambiente.",
+    icono: "leaf"
+  }
+];
+
+const galeria = [
+  { src: "/images/primaria/unnamed (2).jpg", alt: "Trabajo colaborativo en el aula", caption: "Aprendizaje colaborativo" },
+  { src: "/images/primaria/unnamed (4).jpg", alt: "Aula de informática", caption: "Tecnología educativa" },
+  { src: "/images/primaria/unnamed (1).jpg", alt: "Huerta escolar", caption: "Contacto con la naturaleza" },
+  { src: "/images/primaria/unnamed (3).jpg", alt: "Obra de teatro escolar", caption: "Arte y expresión" },
+  { src: "/images/primaria/unnamed (6).jpg", alt: "Excursión educativa", caption: "Salidas didácticas" },
+  { src: "/images/primaria/unnamed (8).jpg", alt: "Mural de valores", caption: "Educación en valores" },
+  { src: "/images/primaria/unnamed (7).jpg", alt: "Actividades al aire libre", caption: "Campamento escolar" },
+  { src: "/images/primaria/unnamed (9).jpg", alt: "Recreo y juegos", caption: "Actividades recreativas" },
+];
+
+const iconPaths: Record<string, string> = {
+  users: "M12 4.354a4 4 0 110 5.292M15 21H3v-1a6 6 0 0112 0v1zm0 0h6v-1a6 6 0 00-9-5.197M13 7a4 4 0 11-8 0 4 4 0 018 0z",
+  computer: "M9.75 17L9 20l-1 1h8l-1-1-.75-3M3 13h18M5 17h14a2 2 0 002-2V5a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z",
+  globe: "M21 12a9 9 0 01-9 9m9-9a9 9 0 00-9-9m9 9H3m9 9a9 9 0 01-9-9m9 9c1.657 0 3-4.03 3-9s-1.343-9-3-9m0 18c-1.657 0-3-4.03-3-9s1.343-9 3-9m-9 9a9 9 0 019-9",
+  heart: "M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z",
+  palette: "M7 21a4 4 0 01-4-4V5a2 2 0 012-2h4a2 2 0 012 2v12a4 4 0 01-4 4zm0 0h12a2 2 0 002-2v-4a2 2 0 00-2-2h-2.343M11 7.343l1.657-1.657a2 2 0 012.828 0l2.829 2.829a2 2 0 010 2.828l-8.486 8.485M7 17h.01",
+  leaf: "M5 3v4M3 5h4M6 17v4m-2-2h4m5-16l2.286 6.857L21 12l-5.714 2.143L13 21l-2.286-6.857L5 12l5.714-2.143L13 3z"
+};
+---
+
+<Layout
+  title="Nivel Primario"
+  description="Nivel Primario de Learning Proyecto Integral. Educación integral con metodología activa, inglés Cambridge, tecnología educativa y formación en valores para niños de 6 a 12 años."
+>
+  <!-- Hero Section -->
+  <section class="relative pt-32 pb-20 overflow-hidden">
+    <div class="absolute inset-0 bg-gradient-to-br from-primary-600 via-primary-700 to-primary-800"></div>
+    <div class="absolute inset-0 bg-pattern opacity-10"></div>
+
+    <!-- Decorative shapes with animations -->
+    <div class="absolute top-20 right-0 w-96 h-96 bg-white/10 rounded-full blur-3xl animate-pulse"></div>
+    <div class="absolute bottom-0 left-0 w-80 h-80 bg-secondary-500/20 rounded-full blur-3xl animate-pulse" style="animation-delay: 1s"></div>
+    <div class="absolute top-1/2 right-1/4 w-32 h-32 bg-accent-400/20 rounded-full blur-2xl animate-float"></div>
+    <div class="absolute bottom-1/4 left-1/3 w-24 h-24 bg-white/10 rounded-full blur-xl animate-float" style="animation-delay: 2s"></div>
+
+    <div class="container-custom relative z-10">
+      <div class="max-w-4xl">
+        <!-- Breadcrumb -->
+        <nav class="flex items-center gap-2 text-sm text-primary-200 mb-6">
+          <a href="/" class="hover:text-white transition-colors">Inicio</a>
+          <svg class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+            <path stroke-linecap="round" stroke-linejoin="round" d="M9 5l7 7-7 7" />
+          </svg>
+          <span class="text-white font-medium">Nivel Primario</span>
+        </nav>
+
+        <span class="inline-block px-4 py-1.5 bg-white/20 backdrop-blur-sm text-white rounded-full text-sm font-semibold mb-6">
+          6 a 12 años
+        </span>
+
+        <h1 class="text-4xl sm:text-5xl lg:text-6xl font-display font-bold text-white mb-6">
+          Nivel Primario
+        </h1>
+
+        <p class="text-xl text-primary-100 leading-relaxed mb-8 max-w-2xl">
+          Construimos las bases sólidas del conocimiento en un ambiente de contención, estímulo y creatividad.
+          Formamos niños autónomos, curiosos y comprometidos con su aprendizaje.
+        </p>
+
+        <div class="flex flex-wrap gap-4">
+          <a href="#contacto" class="btn-accent">
+            <svg class="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+              <path stroke-linecap="round" stroke-linejoin="round" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z" />
+            </svg>
+            Solicitar Entrevista
+          </a>
+          <a href="#galeria" class="btn-secondary bg-white/10 border-white/30 text-white hover:bg-white/20">
+            <svg class="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+              <path stroke-linecap="round" stroke-linejoin="round" d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z" />
+            </svg>
+            Ver Galería
+          </a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Propuesta Educativa -->
+  <section class="py-20 relative overflow-hidden">
+    <div class="absolute inset-0 bg-gradient-to-br from-white via-primary-50/30 to-white"></div>
+    <div class="absolute top-20 left-10 w-40 h-40 bg-primary-100/50 rounded-full blur-3xl"></div>
+    <div class="absolute bottom-20 right-10 w-32 h-32 bg-secondary-100/50 rounded-full blur-3xl"></div>
+
+    <div class="container-custom relative z-10">
+      <div class="grid lg:grid-cols-2 gap-16 items-center">
+        <div class="animate-on-scroll">
+          <div class="inline-flex items-center gap-2 px-4 py-2 bg-white/80 backdrop-blur-sm border border-primary-100 rounded-full text-sm font-semibold mb-4 shadow-sm">
+            <svg class="w-4 h-4 text-primary-600" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+              <path stroke-linecap="round" stroke-linejoin="round" d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.247 18 16.5 18c-1.746 0-3.332.477-4.5 1.253" />
+            </svg>
+            <span class="text-primary-700">Nuestra Propuesta</span>
+          </div>
+          <h2 class="text-3xl sm:text-4xl font-display font-bold text-gray-900 mb-6">
+            Educación integral para el <span class="text-gradient">desarrollo pleno</span>
+          </h2>
+          <p class="text-lg text-gray-600 leading-relaxed mb-6">
+            En el Nivel Primario de Learning Proyecto Integral, creemos que cada niño tiene un potencial único
+            que merece ser desarrollado. Nuestra metodología de <strong>aprendizaje activo</strong> pone al alumno
+            en el centro del proceso educativo, fomentando la curiosidad, el pensamiento crítico y la autonomía.
+          </p>
+          <p class="text-lg text-gray-600 leading-relaxed mb-8">
+            Trabajamos en proyectos interdisciplinarios que conectan las distintas áreas del conocimiento,
+            promoviendo un aprendizaje significativo y duradero. El trabajo colaborativo y el respeto por
+            el otro son pilares fundamentales de nuestra propuesta.
+          </p>
+
+          <div class="flex items-center gap-6">
+            <div class="text-center">
+              <span class="block text-3xl font-display font-bold text-primary-600">1° a 6°</span>
+              <span class="text-sm text-gray-500">Grados</span>
+            </div>
+            <div class="w-px h-12 bg-gray-200"></div>
+            <div class="text-center">
+              <span class="block text-3xl font-display font-bold text-primary-600">Jornada</span>
+              <span class="text-sm text-gray-500">Completa</span>
+            </div>
+            <div class="w-px h-12 bg-gray-200"></div>
+            <div class="text-center">
+              <span class="block text-3xl font-display font-bold text-primary-600">Inglés</span>
+              <span class="text-sm text-gray-500">Intensivo</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="relative">
+          <img
+            src="/images/primaria/unnamed (2).jpg"
+            alt="Alumnos trabajando en equipo"
+            class="rounded-2xl shadow-2xl w-full"
+            loading="lazy"
+          />
+          <div class="absolute -bottom-6 -left-6 bg-white rounded-xl shadow-lg p-4 max-w-xs">
+            <div class="flex items-center gap-3">
+              <div class="w-12 h-12 bg-secondary-100 rounded-full flex items-center justify-center">
+                <svg class="w-6 h-6 text-secondary-600" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                  <path stroke-linecap="round" stroke-linejoin="round" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
+                </svg>
+              </div>
+              <div>
+                <p class="font-semibold text-gray-900">Certificación Cambridge</p>
+                <p class="text-sm text-gray-500">Inglés con estándares internacionales</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Características -->
+  <section class="py-20 section-gradient">
+    <div class="container-custom">
+      <div class="text-center max-w-3xl mx-auto mb-16">
+        <span class="inline-block px-4 py-1.5 bg-secondary-100 text-secondary-700 rounded-full text-sm font-semibold mb-4">
+          ¿Qué nos diferencia?
+        </span>
+        <h2 class="text-3xl sm:text-4xl font-display font-bold text-gray-900 mb-6">
+          Una educación <span class="text-gradient">completa</span>
+        </h2>
+        <p class="text-lg text-gray-600">
+          Combinamos excelencia académica con desarrollo emocional, artístico y social
+          para formar personas íntegras.
+        </p>
+      </div>
+
+      <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+        {caracteristicas.map((item, index) => (
+          <div
+            class="card-glass p-8 animate-on-scroll"
+            style={`animation-delay: ${index * 0.1}s`}
+          >
+            <div class="w-14 h-14 bg-primary-100 rounded-2xl flex items-center justify-center mb-6">
+              <svg class="w-7 h-7 text-primary-600" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5">
+                <path stroke-linecap="round" stroke-linejoin="round" d={iconPaths[item.icono]} />
+              </svg>
+            </div>
+            <h3 class="text-xl font-display font-bold text-gray-900 mb-3">
+              {item.titulo}
+            </h3>
+            <p class="text-gray-600 leading-relaxed">
+              {item.descripcion}
+            </p>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- Cambridge Badge -->
+  <section class="py-16 bg-white">
+    <div class="container-custom">
+      <div class="bg-gradient-to-r from-primary-50 to-secondary-50 rounded-3xl p-8 lg:p-12">
+        <div class="flex flex-col lg:flex-row items-center gap-8">
+          <img
+            src="/images/primaria/unnamed (5).jpg"
+            alt="Cambridge Assessment"
+            class="h-24 object-contain"
+            loading="lazy"
+          />
+          <div class="text-center lg:text-left">
+            <h3 class="text-2xl font-display font-bold text-gray-900 mb-3">
+              Programa de Inglés con Certificación Internacional
+            </h3>
+            <p class="text-gray-600 max-w-2xl">
+              Nuestro programa de inglés intensivo está avalado por <strong>Cambridge Assessment</strong>,
+              preparando a los alumnos para rendir exámenes internacionales que certifican su nivel de inglés
+              con reconocimiento mundial.
+            </p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Galería -->
+  <section id="galeria" class="py-20 bg-gray-50">
+    <div class="container-custom">
+      <div class="text-center max-w-3xl mx-auto mb-12">
+        <span class="inline-block px-4 py-1.5 bg-accent-100 text-accent-700 rounded-full text-sm font-semibold mb-4">
+          Galería
+        </span>
+        <h2 class="text-3xl sm:text-4xl font-display font-bold text-gray-900 mb-6">
+          Momentos que <span class="text-gradient">inspiran</span>
+        </h2>
+        <p class="text-lg text-gray-600">
+          Descubrí cómo nuestros alumnos aprenden, crean y crecen cada día.
+        </p>
+      </div>
+
+      <div class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
+        {galeria.map((img, index) => (
+          <div
+            class="group relative overflow-hidden rounded-xl aspect-square animate-on-scroll"
+            style={`animation-delay: ${index * 0.05}s`}
+          >
+            <img
+              src={img.src}
+              alt={img.alt}
+              class="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110"
+              loading="lazy"
+            />
+            <div class="absolute inset-0 bg-gradient-to-t from-black/70 via-black/0 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+              <div class="absolute bottom-0 left-0 right-0 p-4">
+                <p class="text-white font-medium text-sm">{img.caption}</p>
+              </div>
+            </div>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- CTA -->
+  <section id="contacto" class="py-20 bg-white">
+    <div class="container-custom">
+      <div class="bg-gradient-to-r from-primary-600 via-primary-700 to-primary-800 rounded-3xl p-8 lg:p-16 text-center relative overflow-hidden">
+        <div class="absolute inset-0 opacity-10">
+          <div class="absolute top-0 left-0 w-40 h-40 bg-white rounded-full -translate-x-1/2 -translate-y-1/2"></div>
+          <div class="absolute bottom-0 right-0 w-60 h-60 bg-white rounded-full translate-x-1/3 translate-y-1/3"></div>
+        </div>
+
+        <div class="relative z-10 max-w-2xl mx-auto">
+          <h2 class="text-3xl lg:text-4xl font-display font-bold text-white mb-6">
+            ¿Querés conocer nuestra propuesta para Primaria?
+          </h2>
+          <p class="text-primary-100 text-lg mb-8">
+            Agendá una entrevista con nuestro equipo directivo y conocé nuestras instalaciones.
+            Te acompañamos en todo el proceso de admisión.
+          </p>
+          <div class="flex flex-col sm:flex-row justify-center gap-4">
+            <a
+              href="https://docs.google.com/forms/d/e/1FAIpQLSe71-Th8mRRYIxWh2k52RKWBg3SMiBx1iGAd3-AiRe7MgbHCg/viewform"
+              target="_blank"
+              rel="noopener noreferrer"
+              class="btn-accent text-base"
+            >
+              <svg class="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                <path stroke-linecap="round" stroke-linejoin="round" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z" />
+              </svg>
+              Agendar Entrevista
+            </a>
+            <a href="/#contacto" class="btn-secondary bg-white/10 border-white/30 text-white hover:bg-white/20">
+              <svg class="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                <path stroke-linecap="round" stroke-linejoin="round" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" />
+              </svg>
+              Enviar Consulta
+            </a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+</Layout>
