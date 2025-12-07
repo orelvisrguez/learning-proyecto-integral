@@ -1,17 +1,22 @@
 ---
-// Marcar esta página como renderizada en servidor (no estática)
-export const prerender = false;
-
 import Layout from '@layouts/Layout.astro';
-import { obtenerNoticiaPorSlug } from '@lib/supabase';
+import { obtenerTodasLasNoticias, obtenerNoticiaPorSlug } from '@lib/supabase';
 
-// Obtener el slug de la URL
+// Generar rutas estáticas para todas las noticias
+export async function getStaticPaths() {
+  const noticias = await obtenerTodasLasNoticias();
+  return noticias.map((noticia) => ({
+    params: { slug: noticia.slug },
+    props: { noticia }
+  }));
+}
+
+// Obtener la noticia de las props o por slug
+const { noticia: noticiaProps } = Astro.props;
 const { slug } = Astro.params;
+const noticia = noticiaProps || await obtenerNoticiaPorSlug(slug || '');
 
-// Obtener la noticia de Supabase
-const noticia = await obtenerNoticiaPorSlug(slug || '');
-
-// Si no existe la noticia, redirigir a 404
+// Si no existe la noticia, mostrar 404
 if (!noticia) {
   return Astro.redirect('/404');
 }

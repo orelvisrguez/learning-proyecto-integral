@@ -90,6 +90,21 @@ export async function obtenerPublicacionInscripcion(): Promise<Noticia | null> {
   return data;
 }
 
+export async function obtenerTodasLasNoticias(): Promise<Noticia[]> {
+  const { data, error } = await supabase
+    .from('noticias')
+    .select('*')
+    .eq('publicada', true)
+    .order('fecha_publicacion', { ascending: false });
+
+  if (error) {
+    console.error('Error al obtener todas las noticias:', error);
+    return [];
+  }
+
+  return data || [];
+}
+
 export async function obtenerNoticiaPorSlug(slug: string): Promise<Noticia | null> {
   const { data, error } = await supabase
     .from('noticias')
