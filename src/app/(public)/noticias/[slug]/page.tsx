@@ -110,7 +110,7 @@ export default async function PostPage({ params }: { params: Promise<{ slug: str
             </div>
 
             <div className="prose prose-lg max-w-none">
-              {post.content.split("\n").map((paragraph, index) => (
+              {post.content.split("\n").map((paragraph: string, index: number) => (
                 paragraph.trim() ? (
                   <p key={index} className="text-slate-600 leading-relaxed mb-6">
                     {paragraph}
