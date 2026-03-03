@@ -19,7 +19,7 @@ export default async function Home() {
     },
     orderBy: { createdAt: "desc" },
     take: 3,
-  })
+  }) as { id: string; title: string; slug: string; excerpt: string | null; imageUrl: string | null; createdAt: Date; category: { name: string; color: string } }[]
 
   return (
     <>

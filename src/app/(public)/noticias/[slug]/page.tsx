@@ -9,7 +9,7 @@ export async function generateMetadata({ params }: { params: Promise<{ slug: str
   const post = await prisma.post.findUnique({
     where: { slug },
     select: { title: true, excerpt: true },
-  })
+  }) as { title: string; excerpt: string | null } | null
 
   if (!post) {
     return { title: "Noticia no encontrada" }
@@ -29,7 +29,7 @@ async function getPost(slug: string) {
     include: {
       category: true,
     },
-  })
+  }) as Promise<{ id: string; title: string; slug: string; content: string; excerpt: string | null; imageUrl: string | null; categoryId: string; createdAt: Date; category: { id: string; name: string; color: string } } | null>
 }
 
 export default async function PostPage({ params }: { params: Promise<{ slug: string }> }) {
