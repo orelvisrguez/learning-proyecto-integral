@@ -26,7 +26,7 @@ async function getPosts(categorySlug?: string) {
       category: true,
     },
     orderBy: { createdAt: "desc" },
-  })
+  }) as Promise<{ id: string; slug: string; title: string; excerpt: string | null; imageUrl: string | null; createdAt: Date; category: { id: string; name: string; slug: string; color: string } }[]>
 }
 
 export default async function NoticiasPage({
