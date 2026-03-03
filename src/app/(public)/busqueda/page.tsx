@@ -4,7 +4,20 @@ import { Search as SearchIcon, Calendar } from "lucide-react"
 
 export const revalidate = 60
 
-async function searchPosts(query: string) {
+interface PostWithCategory {
+  id: string
+  title: string
+  slug: string
+  excerpt: string | null
+  imageUrl: string | null
+  createdAt: Date
+  category: {
+    name: string
+    color: string
+  }
+}
+
+async function searchPosts(query: string): Promise<PostWithCategory[]> {
   return prisma.post.findMany({
     where: {
       published: true,
@@ -18,7 +31,7 @@ async function searchPosts(query: string) {
       category: true,
     },
     orderBy: { createdAt: "desc" },
-  })
+  }) as Promise<PostWithCategory[]>
 }
 
 export default async function SearchPage({
@@ -58,7 +71,7 @@ export default async function SearchPage({
           </div>
         ) : (
           <div className="space-y-6">
-            {results.map((post) => (
+            {results.map((post: PostWithCategory) => (
               <Link
                 key={post.id}
                 href={`/noticias/${post.slug}`}
