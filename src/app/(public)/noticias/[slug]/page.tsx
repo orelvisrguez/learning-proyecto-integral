@@ -3,7 +3,6 @@ import Link from "next/link"
 import { notFound } from "next/navigation"
 import { prisma } from "@/lib/prisma"
 import { Calendar, ArrowLeft, User, Clock } from "lucide-react"
-import { Prisma } from "@prisma/client"
 
 export async function generateMetadata({ params }: { params: Promise<{ slug: string }> }): Promise<Metadata> {
   const { slug } = await params
@@ -51,7 +50,7 @@ export default async function PostPage({ params }: { params: Promise<{ slug: str
       category: true,
     },
     take: 3,
-  }) as Awaited<ReturnType<typeof prisma.post.findMany<{ include: { category: true } }>>>
+  }) as { id: string; slug: string; title: string; imageUrl: string | null; category: { name: string } }[]
 
   return (
     <div className="min-h-screen bg-gradient-to-br from-slate-50 via-white to-slate-100 pt-24 pb-16">
