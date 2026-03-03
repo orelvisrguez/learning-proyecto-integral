@@ -27,7 +27,7 @@ export default async function AdminDashboard() {
   const recentMessages = await prisma.contactMessage.findMany({
     take: 5,
     orderBy: { createdAt: "desc" },
-  })
+  }) as { id: string; name: string; subject: string | null; message: string; read: boolean }[]
 
   const stats = [
     {
