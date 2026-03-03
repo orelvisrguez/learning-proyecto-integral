@@ -15,7 +15,7 @@ export default async function AdminNoticiasPage() {
   const posts = await prisma.post.findMany({
     include: { category: true },
     orderBy: { createdAt: "desc" },
-  })
+  }) as { id: string; title: string; slug: string; excerpt: string | null; published: boolean; featured: boolean; createdAt: Date; category: { name: string; color: string } }[]
 
   return (
     <div>

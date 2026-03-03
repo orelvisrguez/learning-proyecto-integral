@@ -16,6 +16,7 @@ const playfair = Playfair_Display({
 })
 
 export const metadata: Metadata = {
+  metadataBase: new URL("https://www.learning.edu.ar"),
   title: {
     default: "Learning Proyecto Integral - Educación Bilingüe de Excelencia",
     template: "%s | Learning Proyecto Integral",
