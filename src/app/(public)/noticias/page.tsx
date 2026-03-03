@@ -13,7 +13,7 @@ export const revalidate = 60
 async function getCategories() {
   return prisma.category.findMany({
     orderBy: { name: "asc" },
-  })
+  }) as Promise<{ id: string; name: string; slug: string; color: string }[]>
 }
 
 async function getPosts(categorySlug?: string) {
