@@ -22,7 +22,7 @@ export default async function AdminDashboard() {
     take: 5,
     orderBy: { createdAt: "desc" },
     include: { category: true },
-  })
+  }) as { id: string; title: string; createdAt: Date; category: { name: string } }[]
 
   const recentMessages = await prisma.contactMessage.findMany({
     take: 5,
